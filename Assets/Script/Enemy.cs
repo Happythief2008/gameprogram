@@ -4,15 +4,25 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    Rigidbody2D rigid;
+    public int nextMove;
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        rigid = GetComponent<Rigidbody2D>();
+        Think();
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        
+        rigid.velocity = new Vector2(nextMove, rigid.velocity.y);
+    }
+
+    void Think()
+    {
+        nextMove = Random.Range(-1, 2);
+
+        Invoke("Think", 2);
     }
 }
