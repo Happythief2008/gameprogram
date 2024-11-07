@@ -11,6 +11,14 @@ public class PlayerMove : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody2D>();
     }
+    void Update()
+    {/*
+        if(Input.GetButtonUp("Horizontal"))
+        {
+            rigid.velocity.normalized;
+            rigid.veloity = new Vector2(0.5, rigid.velocity.y);
+        }*/
+    }
     void FixedUpdate()
     {
         float h = Input.GetAxisRaw("Horizontal");
@@ -24,3 +32,4 @@ public class PlayerMove : MonoBehaviour
     }
 
 }
+
