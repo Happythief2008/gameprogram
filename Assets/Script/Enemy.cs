@@ -4,25 +4,43 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    Rigidbody2D rigid;
-    public int nextMove;
-    // Start is called before the first frame update
-    void Awake()
+    Transform player = GameObject.FindWithTag("Player").transform;
+
+    Vector2 currentPosition = new Vector2(transform.position.x, transform.position.y);
+    Vector2 playerPosition = new Vector2(player.position.x, player.position.y);
+
+
+    public MonsterState currentState = MonsterState.Idle;
+    private enum MonsterState
     {
-        rigid = GetComponent<Rigidbody2D>();
-        Think();
+        Idle,
+        Move,
+        Attak
+    }
+    private State _state;
+
+    private void Start()
+    {
+
     }
 
-    // Update is called once per frame
-    void FixedUpdate()
+    private void Update()
     {
-        rigid.velocity = new Vector2(nextMove, rigid.velocity.y);
+        switch (currentState)
+        {
+            case MonsterState.Idle:
+                break;
+
+            case MonsterState.Move:
+                break;
+
+            case MonsterState.Attak:
+                break;
+        }
     }
 
-    void Think()
+    private void Think()
     {
-        nextMove = Random.Range(-1, 2);
 
-        Invoke("Think", 2);
     }
 }
