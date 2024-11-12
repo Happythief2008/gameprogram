@@ -6,6 +6,7 @@ public class PlayerMove : MonoBehaviour
 {
     public float maxSpeed;
     public float jumpPower;
+    private bool isJumping= false;
     Rigidbody2D rigid;
 
     void Awake()
@@ -25,9 +26,10 @@ public class PlayerMove : MonoBehaviour
         if (Input.GetAxisRaw("Horizontal") != 0)
             transform.localScale = new Vector3(Input.GetAxisRaw("Horizontal"), 1, 1);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space) && isJumping == false)
         {
             Jump();
+            isJumping = true;
         }
     }
 
@@ -47,5 +49,13 @@ public class PlayerMove : MonoBehaviour
     private void Jump()
     {
         rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            isJumping = false;
+        }
     }
 }
